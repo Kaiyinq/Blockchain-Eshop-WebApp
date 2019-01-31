@@ -1,10 +1,12 @@
+<?php include 'login_connect.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>E-SHOP HTML Template</title>
@@ -418,7 +420,7 @@
                 <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">
                         <div id="login-box" class="col-md-12">
-                            <form id="login-form" class="form" action="php/connect.php" method="post">
+                            <form id="login-form" class="form" action="#" method="post">
                                 <h3 class="text-center">Welcome to E-shop!</h3>
                                 <div class="form-group">
                                     <label for="username">Username:</label><br>
@@ -432,7 +434,7 @@
                                     <a href="#" class="pull-right"><label>Forget Password?</label></a><br>
                                 </div>
                                 <div class="form-group">
-                                    <button class="primary-btn pull-right" type="button" name="submit" id="submit" value="submit" onclick="validate()">Login</button>
+                                    <button class="primary-btn pull-right" type="submit" name="submitBtn">Login</button>
                                 </div>
                             </form>
                         </div>
