@@ -1,22 +1,30 @@
-var attempt = 3;
+//regular expression
+//var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+var passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 
-function validate() {
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
-
-  if (username == "hi" && password == "123"){
-    alert ("Login successfully");
-    window.location = "home.html"; // Redirecting to other page.
-    return false;
-  } else{
-    attempt --;// Decrementing by one.
-    alert("You have left "+attempt+" attempt;");
-    // Disabling fields after 3 attempts.
-    if(attempt == 0){
-      document.getElementById("username").disabled = true;
-      document.getElementById("password").disabled = true;
-      document.getElementById("submit").disabled = true;
-      return false;
-    }
-  }
-}
+$(document).ready(function(){  
+  $('#submitBtn').click(function(){  
+    var username = $('#username').val();  
+    var password = $('#password').val();  
+    if(username == '' || password == '') {  
+      alert("All fields required");
+    } else if (!password.match(passwordRegEx)) {
+      alert("Wrong format Password");
+    } else {  
+      $.ajax({  
+        url:"login_connect.php",  
+        method:"POST",  
+        data:{username:username, password:password},  
+        // success message
+        success:function(data){  
+          alert(data); 
+          window.location="home.php";
+        },
+        // error message
+        error:function(data){
+          alert("Wrong username or password!");
+        }
+      });  
+    }  
+  });  
+});  

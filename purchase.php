@@ -7,7 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP HTML Template</title>
+    <title>E-SHOP HTML Template</title>
+    
+    <!-- Web3j -->
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -451,6 +454,7 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
+				
 			</div>
 			<!-- /row -->
 		</div>

@@ -51,7 +51,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="home.php">Home</a></li>
-				<li class="active">Login</li>
+				<li class="active">Register</li>
 			</ul>
 		</div>
 	</div>
@@ -65,23 +65,46 @@
             <div class="container">
                 <!-- row -->
                 <div id="login-row" class="row justify-content-center align-items-center">
-                    <div id="login-column" class="col-md-6">
+                    <div id="login-column" class="col-md-8">
                         <div id="login-box" class="col-md-12">
                             <form id="login-form" class="form" action="#" method="post">
-                                <h3 class="text-center">Welcome to E-shop!</h3>
+                                <h3 class="text-center">Create your EShop Account</h3>
                                 <div class="form-group">
-                                    <label for="username">Phone Number:</label><br>
-                                    <input type="text" name="username" id="username" class="input" maxlength="8" required>
+                                    <label for="fullname">*Full Name:</label><br>
+                                    <input type="text" name="fullname" id="fullname" class="input" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Password:</label><br>
-                                    <input type="password" name="password" id="password" class="input" required>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="phone">*Phone Number:</label><br>
+                                        <input type="text" name="phone" id="phone" class="input" maxlength="8" required><br>
+                                    </div>
+                                    <div class="col">
+                                        <label for="password">*Password:</label><br>
+                                        <input type="password" name="password" id="password" class="input" required><br>
+                                    </div>	
                                 </div>
+								<br>
                                 <div class="form-group">
-                                    <a href="#" class="pull-right"><label>Forget Password?</label></a><br>
+                                    <label for="emailAdd">*Email Address:</label><br>
+                                    <input type="email" name="emailAdd" id="emailAdd" class="input" required>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col">
+										<label for="birthdate">*Date of Birth:</label>
+										<input type="date" name="birthdate" id="birthdate" class="input" required>
+									</div>
+                                    <div class="col">
+                                        <label for="gender">*Gender:</label><br>
+                                        <select class="input" id="gender" name="gender">
+											<option value="F">F</option>
+											<option value="M">M</option>
+										</select>
+                                        <br>
+                                    </div>
+                                </div>
+								<br>
                                 <div class="form-group">
-                                    <button class="primary-btn pull-right" type="button" name="submitBtn" id="submitBtn">Login</button>
+                                    <button class="primary-btn pull-right" type="button" name="submitBtn" id="submitBtn">Register</button>
                                 </div>
                             </form>
                         </div>
@@ -105,8 +128,8 @@
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/login.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+	<script src="js/register.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </body>
 
