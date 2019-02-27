@@ -4,8 +4,6 @@ var passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 var phoneRegEx = new RegExp("^(8|9)[0-9]{7}");
 var emailRegEx = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
 
-
-
 $(document).ready(function(){  
   $('#submitBtn').click(function(){  
     var fullname = $('#fullname').val(); 

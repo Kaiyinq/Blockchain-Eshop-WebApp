@@ -3,13 +3,13 @@
 <?php
 require('config.php');
 
-$category = 6; //UNDONE (HOME PAGE LINK TO THIS)
+$category = 3; //UNDONE (HOME PAGE LINK TO THIS)
 $rating = 0;
 
 if (mysqli_connect_error()) {
     die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
 } else {
-    $QUERY = "SELECT prod_id, prod_name, prod_price, prod_color, prod_size, prod_brand, prod_pic, prod_rating 
+    $QUERY = "SELECT prod_id, prod_name, prod_price, prod_color, prod_size, prod_brand, prod_pic 
                 FROM eshop.products WHERE category_id = ?";
 
     if ($stmt = $conn->prepare($QUERY)) {
@@ -46,7 +46,6 @@ if (mysqli_connect_error()) {
                     }else {
                         $GLOBALS['overallRating'] = ceil($GLOBALS['overallRating']);
                     }
-                    echo $GLOBALS['overallRating'];
                     $prodrating = $GLOBALS['overallRating'];
                     $productName = $row["prod_name"];
                     $productPrice = $row["prod_price"];
@@ -57,7 +56,7 @@ if (mysqli_connect_error()) {
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['prod_pic']).'"/>';
                     echo "</div>";
                     echo "<div class='product-body'>";
-                    echo "<h3 class='product-price'>$$prodrating</h3>";
+                    echo "<h3 class='product-price'>$$productPrice</h3>";
                     echo "<div class='product-rating'>";
                     for ($i = 0; $i < $prodrating; $i++) {
                         echo "<i class='fa fa-star'></i> ";

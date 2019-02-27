@@ -18,7 +18,7 @@ $(document).ready(function(){
             $("#productlist").html(data); 
 
             $('#viewprod').click(function(){ 
-                window.location="product-page.html"; //UNDONE (SHOULD LINK TO SPECFIC PRODUCT)
+                window.location="productpage.php"; //UNDONE (SHOULD LINK TO SPECFIC PRODUCT)
             });
         }
     });    
