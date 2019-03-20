@@ -1,14 +1,30 @@
 {
   "name": "fypblockchain",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
+    "dev": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "web3": "github:ethereum/web3.js"
-  }
+    "truffle-contract": "^3.0.7",
+    "web3": "^0.20.6"
+  },
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaiyinq/Blockchain-Eshop-WebApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kaiyinq/Blockchain-Eshop-WebApp/issues"
+  },
+  "homepage": "https://github.com/Kaiyinq/Blockchain-Eshop-WebApp#readme",
+  "description": ""
 }

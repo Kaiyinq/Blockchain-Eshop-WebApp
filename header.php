@@ -11,8 +11,15 @@
                     <li><a href="#">Newsletter</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Track My Order</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
+                    <?php 
+                    if (!isset($_SESSION)) {
+                        session_start(); //start session
+                        if(!isset($_SESSION["buyerid"])) { 
+                            echo "<li><a href='login.php'>Login</a></li>";
+                            echo" <li><a href='register.php'>Register</a></li>";
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -30,23 +37,11 @@
                     </a>
                 </div>
                 <!-- /Logo -->
-
-                <!-- Search -->
-                <div class="header-search">
-                    <form>
-                        <input class="input search-input" type="text" placeholder="Enter your keyword">
-                        <select class="input search-categories">
-                            <option value="0">All Categories</option>
-                            <option value="1">Category 01</option>
-                            <option value="1">Category 02</option>
-                        </select>
-                        <button class="search-btn"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-                <!-- /Search -->
             </div>
             <div class="pull-right">
-                <ul class="header-btns">
+                <ul class="header-btns" id="accAndCart">
+                    <!-- Account -->
+                    <?php include 'header-acccart.php' ?>
                     <!-- Mobile nav toggle-->
                     <li class="nav-toggle">
                         <button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>

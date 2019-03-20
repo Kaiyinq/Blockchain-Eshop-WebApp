@@ -1,5 +1,7 @@
 <?php  
+// https://websitebeaver.com/prepared-statements-in-php-mysqli-to-prevent-sql-injection
 require('config.php'); 
+session_start(); //start session
 if(isset($_POST["username"])) {  
     $username = mysqli_real_escape_string($conn, $_POST["username"]);  
     $password = mysqli_real_escape_string($conn, $_POST["password"]);  
@@ -7,7 +9,7 @@ if(isset($_POST["username"])) {
     if (mysqli_connect_error()) {
         die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
     } else {
-        $QUERY = "SELECT username, userpass, user_fullname FROM eshop.users WHERE username = ?";
+        $QUERY = "SELECT userid, username, userpass, user_fullname FROM eshop.users WHERE username = ?";
     
         if ($stmt = $conn->prepare($QUERY)) {
             //prepared statement
@@ -18,6 +20,8 @@ if(isset($_POST["username"])) {
                 while ($row = $result->fetch_assoc()) {
                     //echo "id: " . $row["userid"]. " - Name: " . $row["username"]. " Password:" . $row["userpass"]. "<br>";
                     //json_encode($row["user_id"]);
+                    
+                    $_SESSION["buyerid"] = $row["userid"]; //set session
                     $fullname = $row["user_fullname"];                    
                     if ($username == $row["username"] && $password == $row["userpass"]) {
                         echo "Welcome " . "$fullname" . "!"; //anything on success
