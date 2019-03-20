@@ -9,7 +9,6 @@
 
 	<title>E-SHOP HTML Template</title>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -65,6 +64,7 @@
             <div class="container">
                 <!-- row -->
                 <div id="login-row" class="row justify-content-center align-items-center">
+					<div class="col-md-3 col-sm-6"></div>
                     <div id="login-column" class="col-md-6">
                         <div id="login-box" class="col-md-12">
                             <form id="login-form" class="form" action="#" method="post">
@@ -87,13 +87,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- /row -->
+				<!-- /row -->
             </div>
             <!-- /container -->
         </div>   
 		<!--/login-->
 	</div>
 	<!-- /section -->
+	
+	<br><br><br>
 
 	<!-- FOOTER -->
 	<?php include 'footer.php'; ?>

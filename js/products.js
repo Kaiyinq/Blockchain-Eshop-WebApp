@@ -1,3 +1,5 @@
+// FOR PRODUCTS.PHP AND PRODUCTS_CONNECT.PHP
+
 $('.size').click(function(){ 
     var size = $(this).attr('id'); 
     $('#' + size).addClass('active');
@@ -17,8 +19,8 @@ $(document).ready(function(){
         success: function(data) {
             $("#productlist").html(data); 
 
-            $('#viewprod').click(function(){ 
-                window.location="product-page.html"; //UNDONE (SHOULD LINK TO SPECFIC PRODUCT)
+            $('button[name=viewprod]').click(function(){ 
+                window.location="productpage.php?prod=" + $(this).val();
             });
         }
     });    

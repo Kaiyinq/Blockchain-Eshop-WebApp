@@ -825,6 +825,10 @@ textarea.input {
 	06 -> PRODUCT
 ===========================================================*/
 
+.product-price {
+  font-weight: bold;
+}
+
 .product .product-old-price {
   color: #F8694A;
   font-size: 70%;
@@ -1379,6 +1383,15 @@ textarea.input {
   width: 90px;
 }
 
+
+/*----------------------------*\
+	Product Modal
+\*----------------------------*/
+
+.modal-style {
+  margin-top: 60px;
+}
+
 /*----------------------------*\
 	Product tab
 \*----------------------------*/
@@ -1728,3 +1741,59 @@ textarea.input {
     width: 100%;
   }
 }
+
+/*=========================================================
+	13 -> ACCOUNTS PAGE
+===========================================================*/
+
+.account-methods {
+  margin-bottom: 70px;
+}
+
+.personal-info {
+  margin-top:30px;
+}
+
+/*----------------------------*\
+	My Orders Tab
+\*----------------------------*/
+
+.myorders-tab {
+  margin-top: 20px;
+}
+
+.myorders-tab .tab-nav {
+  border-bottom: 1px solid #DADADA;
+  margin-bottom: 15px;
+}
+
+.myorders-tab .tab-nav li {
+  display: inline-block;
+}
+
+.myorders-tab .tab-nav li+li {
+  margin-left: 30px;
+}
+
+.myorders-tab .tab-nav li a {
+  display: block;
+  padding: 15px 0px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.myorders-tab .tab-nav li.active {
+  position: relative;
+}
+
+.myorders-tab .tab-nav li.active a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1.5px;
+  height: 3px;
+  width: 30px;
+  background-color: #F8694A;
+}
+
+

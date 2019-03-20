@@ -1,3 +1,5 @@
+// FOR LOGIN.PHP AND LOGIN_CONNECT.PHP
+
 //regular expression
 //var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 var passwordRegEx = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");

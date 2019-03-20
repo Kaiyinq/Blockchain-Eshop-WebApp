@@ -84,9 +84,13 @@
                                     </div>	
                                 </div>
 								<br>
+								<div class="form-group">
+                                    <label for="address">*Address:</label><br>
+                                    <input type="text" name="address" id="address" class="input" required>
+                                </div>
                                 <div class="form-group">
-                                    <label for="emailAdd">*Email Address:</label><br>
-                                    <input type="email" name="emailAdd" id="emailAdd" class="input" required>
+                                    <label for="emailAdd">*Email:</label><br>
+                                    <input type="text" name="emailAdd" id="emailAdd" class="input" required>
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
