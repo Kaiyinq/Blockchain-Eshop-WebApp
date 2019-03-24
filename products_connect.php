@@ -2,7 +2,7 @@
 
 <?php
 require('config.php');
-$category = 2; //UNDONE (HOME PAGE LINK TO THIS)
+$category = 1; //UNDONE (HOME PAGE LINK TO THIS)
 $rating = 0;
 
 if (mysqli_connect_error()) {
@@ -77,6 +77,8 @@ if (mysqli_connect_error()) {
         $stmt->close();
     }
     $conn->close();
+    
 }
+
 
 ?>

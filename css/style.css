@@ -1390,6 +1390,7 @@ textarea.input {
 
 .modal-style {
   margin-top: 60px;
+  visibility: hidden;
 }
 
 /*----------------------------*\

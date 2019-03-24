@@ -2,10 +2,10 @@
 // REMIX requires buyerToEscrow(address payable _recevier) and escrowToSeller(address payable _recevier) instead
 
 // Contract address => escrow (use truffle to get the contract address when deployed)
-// Account 1 => seller address
-// Account 2 => buyer address
+// Account 0 => seller address
+// Account 1 => buyer address
 
-// convert uint to wei (*1e18)
+// convert 1 ether = 1*1e18 wei
 
 pragma solidity >= 0.4.0 < 0.6.0;
 
@@ -14,15 +14,16 @@ contract ItemListing {
     uint private itemPrice;                                                 // price of the item
     string private itemName;                                                // name of the item
     address private curr_selleradd;                                         // address of the seller selling this item
-    int private prodId;                                                     // the id of item
+    uint private prodId;                                                    // the id of item
 
     constructor () public payable {
         curr_selleradd = msg.sender;
     }
 
-    function ItemList (string memory item_Name, uint item_Price) public returns (uint) {
+    function ItemList (uint prod_id, string memory item_Name, uint item_Price) public returns (uint) {
+        prodId = prod_id;
         itemName = item_Name;
-        itemPrice = item_Price;
+        itemPrice = item_Price;                                             // price is in wei      
         return 1;
     }
 
@@ -34,6 +35,11 @@ contract ItemListing {
     //get constructor - ItemName
     function getItemName() public view returns (string memory) {
         return itemName;
+    }
+    
+    //get constructor - ProdID
+    function getProdID() public view returns (uint) {
+        return prodId;
     }
     
     // get constructor - whose creating the contract (seller)
@@ -48,10 +54,11 @@ contract ItemListing {
 }
 
 contract EscrowCon {
-    uint public itemAmt;   // the price of the item
-    address public buyer;   // buyer address
-    address public seller;  // seller address
-    uint private start;     // set the timestamp
+    uint private itemAmt;                                                       // the price of the item
+    address private buyer;                                                      // buyer address
+    address private seller;                                                     // seller address
+    address payable escrowContractAdd;                                          // escrow contract address
+    uint private start;                                                         // set the timestamp
     ItemListing iL;
 
     // maps addresses to balances e.g. hashtables
@@ -64,25 +71,29 @@ contract EscrowCon {
     constructor (address ItemListContractAddress) public {
         iL = ItemListing(ItemListContractAddress);
         seller = iL.getSellerAdd();                                             // pass the seller_add to this contract
-        itemAmt = iL.getItemPrice();                                            // set the item price (in ether)
+        itemAmt = iL.getItemPrice();                                            // set the item price (in wei)
     }
 
     function () external payable { }
 
-    // payment buyer to escrow - will display to buyer escrow address so buyer can send it to escrow instead of seller
-    function buyerToEscrow(address payable _recevier) public payable {
-        require(msg.value == getItemAmt(), "Input wrong payment amount.");
+    // payment buyer to escrow - will display to buyer escrow address so buyer  
+    // SEND IT TO ESCROW instead of seller
+    function buyerToEscrow(address payable _recevier) public payable returns (bool) {
+        require(msg.value == getItemAmt(), "Input wrong payment amount.");      // payment made in wei
         require(msg.value <= getAccBal(msg.sender), "Insufficient balance.");   // check buyer balance got sufficient funds
+        //require(msg.sender != seller, "Buyer is seller.");                      // check that seller is not buying its own item
+         //escrowContractAdd = address(this);                                   // put this contract address to a payable address escrowContractAdd
         _recevier.transfer(msg.value);                                          // send money to recevier (the contract address)
         buyer = msg.sender;                                                     // when buyer click on buy, buyer will create the contract
         start = now;                                                            //now is an alias for block.timestamp, not really "now"
         emit Transfer(msg.sender, _recevier, msg.value);
+        return true;
     }
 
     // escrow release funds to seller
     function escrowToSeller(address payable _recevier) public payable {
-        uint amt = getItemAmt();
-        require(_recevier == seller, "Error during fund release.");
+        uint amt = getItemAmt();       
+        require(_recevier == seller, "Error during fund release.");             // check that address inputted by system is seller address
         require(amt <= getContractBal(), "Error.");                             // check escrow balance got sufficient funds
         //balances[escrow] -= amt;                                              // deduct money from escrow
         //balances[seller] += amt;                                              // add money to seller
@@ -93,6 +104,11 @@ contract EscrowCon {
     // get constructor - whose creating the contract (buyer)
     function getBuyerAdd() public view returns (address) {
         return buyer;
+    }
+
+    // get constructor - seller address
+    function getSellerAdd() public view returns (address) {
+        return seller;
     }
 
     // get constructor - the amount the buyer is paying
@@ -107,7 +123,7 @@ contract EscrowCon {
 
     // get constructor - ItemAmt
     function getItemAmt() public view returns (uint) {
-        return itemAmt*1e18;                                                    // convert uint to wei
+        return itemAmt;                                                    
     }
 
     // get constructor - balance from specific address

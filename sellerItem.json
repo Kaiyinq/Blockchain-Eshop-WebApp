@@ -1,11 +1,5 @@
 {
     "itemList": [
-        {
-            "prodid": "202",
-            "prodname": "S",
-            "prodprice": "22.00",
-            "contractAdd": "0x595a50e9cdfd721defca33a05d8075d22f682119",
-            "sellerAdd": "0xb06e80e36e62f3f620771e03f8bdb0dc8bd03b50"
-        }
+        
     ]
 }

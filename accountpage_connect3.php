@@ -45,8 +45,6 @@ if(isset($_SESSION["buyerid"])) {
                 }
                
             }
-        }else {
-            die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
         }
 
         $stmt->close();

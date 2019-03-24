@@ -81,7 +81,7 @@
 					<div class="col-md-6">
 						<div class="product-body">
 							<h2 class="product-name"><?php echo $prodName; ?></h2>
-							<h3 class="product-price">$<?php echo $prodPrice; ?> <span class="product-old-price">+ $5.00 Shipping Fee</span></h3>
+							<h3 class="product-price" id="price">$<?php echo $prodPrice; ?> <span class="product-old-price">+ $5.00 Shipping Fee</span></h3>
 							<div class="product-rating">
 								<?php 
 									for ($i = 0; $i < $prodrating; $i++) {
@@ -116,9 +116,9 @@
 									<div class="modal-body">
 										<p>To pay, send ETH to the address below</p>
 										<p class="product-price">Amount</p>
-										<p><?php echo $prodPrice ?></p>
+										<p id="ethamt">(<?php echo $prodPrice ?> SGD)</p>
 										<br>
-										<p>Ethereum Address</p>
+										<p class="product-price">Ethereum Address</p>
 										<p id="contractAddress"></p>
 									</div>
 								</div>

@@ -1,15 +1,14 @@
-<!-- THE PRODUCT RATING HERE IS THE OVERALL POINTS THAT GOT ADD UP AT PRODREVIEW TABLE -->
-
 <?php
+// THE PRODUCT RATING HERE IS THE OVERALL POINTS THAT GOT ADD UP AT PRODREVIEW TABLE 
 require('config.php');
+session_start(); //start session
 
 $prodId = isset($_GET['prod']) ? $_GET['prod'] : '';
-
 
 if (mysqli_connect_error()) {
     die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
 } else {
-    $SELECT1 = "SELECT prod_name, prod_price, prod_quantity, prod_pic, prod_shipmethod, prod_desc, seller_id, count(review_id) AS numReview, SUM(review_stars) AS total
+    $SELECT1 = "SELECT prod_name, prod_price, prod_quantity, prod_pic, prod_shipmethod, prod_desc, seller_id, count(review_id) AS numReview, SUM(review_stars) AS total, prod_contractAdd
                 FROM eshop.products prod
                 LEFT JOIN eshop.prodreview prodr ON prod.prod_id = prodr.prod_id
                 WHERE prod.prod_id = ?";
@@ -20,7 +19,7 @@ if (mysqli_connect_error()) {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+            if ($row = $result->fetch_assoc()) {
                 
                 $prodName = $row["prod_name"];
                 $prodPrice = $row["prod_price"];
@@ -28,6 +27,7 @@ if (mysqli_connect_error()) {
                 $prodShipMethod = $row["prod_shipmethod"];
                 $prodDesc = $row["prod_desc"];
                 $prodPic = $row["prod_pic"];
+                $prodContractAdd = $row["prod_contractAdd"];
 
                 $numReview = $row["numReview"];
                 $totalRating = $row["total"];
@@ -43,11 +43,15 @@ if (mysqli_connect_error()) {
                     $overallRating = ceil($overallRating);
                 }
                 $prodrating = $overallRating;
-            }
-        }else {
-            die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
-        }
 
+                //$prodDetails = array('prodID'=>2, 'prodName'=>$prodName, 'prodPrice'=>$prodPrice);
+                //echo json_encode($prodDetails);
+
+                $_SESSION["prodContractAdd"] = $prodContractAdd;
+                $_SESSION["prodPrice"] = $prodPrice;
+            }
+        }
+       
         $stmt->close();
 
         // FOR REVIEW SECTION
