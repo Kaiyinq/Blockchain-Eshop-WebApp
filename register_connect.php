@@ -1,6 +1,7 @@
 <?php
 require('config.php');
-if(isset($_POST['fullname'])) {
+
+if(isset($_POST['username'])) {
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
@@ -23,7 +24,7 @@ if(isset($_POST['fullname'])) {
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) { 
-                // Existing an account with same username/user_email
+                // Existing an account with same username
                 while ($row = $result->fetch_assoc()) {                
                     if ($username == $row["username"]) {
                         die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
@@ -33,7 +34,7 @@ if(isset($_POST['fullname'])) {
                 // No existing account
                 $stmt->close();
                 $stmt = $conn->prepare($INSERT);
-                $stmt->bind_param('isssssd', $username, $password, $fullname, $address, $gender, $birthdate, $emailAdd);
+                $stmt->bind_param('issssss', $username, $password, $fullname, $address, $gender, $birthdate, $emailAdd);
                 $stmt->execute();
                 echo "Account is successfully created!";
             }

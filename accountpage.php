@@ -94,7 +94,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-12">
 									<div class="myorders-tab">
 										<ul class="tab-nav">
 											<li class="active"><a data-toggle="tab" href="#tab1">To Ship</a></li>
@@ -188,6 +188,12 @@
 	<script src="js/header.js"></script>
 	<script src="js/account.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- <script>
+	function myFunction() {
+		alert("haha");
+	}
+	</script> -->
 
 </body>
 

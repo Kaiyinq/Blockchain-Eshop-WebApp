@@ -14,11 +14,11 @@
                     <?php 
                     if (!isset($_SESSION)) {
                         session_start(); //start session
-                        if(!isset($_SESSION["buyerid"])) { 
+                        if(!isset($_SESSION["buyerid"]) && !isset($_SESSION["sellerid"])) { 
                             echo "<li><a href='login.php'>Login</a></li>";
                             echo" <li><a href='register.php'>Register</a></li>";
-                        }
-                    }
+                        }  
+                    }        
                     ?>
                 </ul>
             </div>

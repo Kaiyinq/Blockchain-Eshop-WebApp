@@ -50,7 +50,8 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="home.php">Home</a></li>
-				<li class="active">Login</li>
+				<li><a href="accountpage.php">Account</a></li>
+				<li class="active">Review</li>
 			</ul>
 		</div>
 	</div>
@@ -63,19 +64,36 @@
             <!-- container -->
             <div class="container">
                 <!-- row -->
+				<!-- Product -->
+				<div class="col-md-12">
+					<div class="order-summary clearfix">
+						<div class="section-title">
+							<h3 class="title">Order Review</h3>
+						</div>
+						<table>
+							<tbody>
+								<tr>
+									<td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
+									<td style="position:absolute; top:1; margin-left:25px;">
+										<h3 class="product-name"></h3>
+										<ul>
+											<li><div id="soldBy"></div></li>
+											<li><div id="orderDate"></div></li>
+											<li><div id="desc"></div></li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /Product -->
                 <!-- Write Reviews -->
                 <div class="col-md-12">
                     <h4 class="text-uppercase">Write Your Review</h4>
-                    <p>Your email address will not be published.</p>
                     <form class="review-form">
                         <div class="form-group">
-                            <input class="input" type="text" placeholder="Your Name" />
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="email" placeholder="Email Address" />
-                        </div>
-                        <div class="form-group">
-                            <textarea class="input" placeholder="Your review"></textarea>
+                            <textarea class="input" placeholder="Your review" id="reviewbox"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="input-rating">
@@ -89,7 +107,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="primary-btn">Submit</button>
+                        <div class="form-group">
+							<button class="primary-btn" type="button" name="submitBtn" id="submitBtn">Submit</button>
+						</div>
                     </form>
                 </div>
                 <!-- /Write Reviews -->
@@ -114,6 +134,10 @@
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+	<!-- Connects to the contract -->
+	<script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/review.js"></script>
 
 </body>
 

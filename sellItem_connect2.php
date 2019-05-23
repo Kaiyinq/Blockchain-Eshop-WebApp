@@ -2,8 +2,7 @@
 require('config.php');
 session_start(); //start session
 
-if(isset($_SESSION["buyerid"]) && isset($_SESSION["sellerid"])) {
-    $userid = $_SESSION["buyerid"];
+if(isset($_SESSION["sellerid"])) {
     $sellerid = $_SESSION["sellerid"];
     $item =  mysqli_real_escape_string($conn, $_POST['item']);
     $quantity = mysqli_real_escape_string($conn, $_POST['quantity']);
@@ -14,8 +13,6 @@ if(isset($_SESSION["buyerid"]) && isset($_SESSION["sellerid"])) {
     $desc = mysqli_real_escape_string($conn, $_POST['desc']);
     $img = file_get_contents($_FILES['file']['tmp_name']);
 
-
-
     if (mysqli_connect_error()) {
         die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
     } else {
@@ -23,24 +20,24 @@ if(isset($_SESSION["buyerid"]) && isset($_SESSION["sellerid"])) {
         $stmt = $conn->prepare($INSERT);
         $stmt->bind_param('ssdisssii', $item, $date, $price, $quantity, $delivery, $img, $desc, $categoryid, $sellerid);
         $stmt->execute();
-
         $stmt->close();
-
-        
-        $SELECT = "SELECT prod_id FROM `products` WHERE seller_id = ? ORDER BY prod_id DESC LIMIT 1";
+ 
+        $SELECT = "SELECT prod_id FROM eshop.products WHERE seller_id = ? ORDER BY prod_id DESC LIMIT 1";
         $stmt2 = $conn->prepare($SELECT);
         $stmt2->bind_param('i', $sellerid);
         $stmt2->execute();
         $result2 = $stmt2->get_result();
         if ($result2->num_rows > 0) {
-            while ($row2 = $result2->fetch_assoc()) {
-                $prodid = $row2["prod_id"]; 
-            }
+            $row2 = $result2->fetch_assoc();
+            $prodid = $row2["prod_id"];     
         }else {
             die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
         }
-    
-        echo $prodid;
+
+        $username = $_SESSION["username"];
+
+        $details = array('prodid'=>$prodid, 'username'=>$username);
+        echo json_encode($details);
 
         $stmt2->close();
         $conn->close();        

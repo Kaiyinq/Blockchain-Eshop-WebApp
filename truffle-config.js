@@ -18,7 +18,8 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const MNENOMIC = 'prevent name slice since because bench diagram own extend laundry pact urban';
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
@@ -99,9 +100,9 @@ module.exports = {
     // rinkeby platform
     rinkeby: {
       provider:function() {
-        return new HDWalletProvider(MNENOMIC, "https://rinkeby.infura.io/v3/9700cb2d70e04e40b7a424be05f0d8de")
+        return new HDWalletProvider(MNENOMIC, "rinkeby.infura.io/v3/fe7e03dbc9904bc98cb106969ced4093")
       },
-      network_id: '3',
+      network_id: '4',
       gas:4500000
     }
 

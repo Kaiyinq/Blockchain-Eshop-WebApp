@@ -8,7 +8,7 @@ if(isset($_SESSION["buyerid"])) {
     if (mysqli_connect_error()) {
         die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
     } else {
-        $SELECT = "SELECT order_id, order_status, order_date, order_quantity, prod_name, prod_price, prod_pic
+        $SELECT = "SELECT order_id, order_status, order_shipok, order_date, order_quantity, prod_name, prod_price, prod_pic
                     FROM eshop.orders o 
                     LEFT JOIN eshop.products p ON o.prod_id = p.prod_id 
                     WHERE o.userid = ?";
@@ -17,8 +17,10 @@ if(isset($_SESSION["buyerid"])) {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {                 
-                $orderStatus = $row["order_status"];   
+            while ($row = $result->fetch_assoc()) { 
+                $orderId = $row["order_id"];                
+                $orderStatus = $row["order_status"];  
+                $orderShipOk = $row["order_shipok"]; 
                 $orderDate = $row["order_date"]; 
                 $orderQuantity = $row["order_quantity"];  
                 
@@ -26,6 +28,8 @@ if(isset($_SESSION["buyerid"])) {
                 $prodPrice = $row["prod_price"]; 
 
                 $totalPrice = $prodPrice * $orderQuantity;
+
+                // <!-- ORDER STATUS - SHIPPING -->
                 if ($orderStatus == "Shipping") {
                     echo "<tr>";
                     echo "<td class='thumb'>";
@@ -41,6 +45,15 @@ if(isset($_SESSION["buyerid"])) {
                     echo "<td class='price text-center'><strong>$$prodPrice</strong></td>";
                     echo "<td class='qty text-center'><span>$orderQuantity</span></td>";
                     echo "<td class='total text-center'><strong class='primary-color'>$$totalPrice</strong></td>";
+                    
+                    if ($orderShipOk == 1) {
+                        $url2 = "confirmDelivery.php?order=$orderId";
+                        echo "<td class='text-center'><a href=$url2>Confirm Delivery</a></td>";
+                    } else {
+                        $url = "confirmShipping.php?order=$orderId";
+                        echo "<td class='text-center'><a href=$url>Confirm Shipping</a></td>";
+                    }
+                    //echo "<td class='text-center'><a href='javascript:myFunction()'>Confirm Delivery</a></td>";
                     echo "</tr>";
                 }
                
@@ -50,7 +63,5 @@ if(isset($_SESSION["buyerid"])) {
         $stmt->close();
         $conn->close();        
     }
-} else {
-    die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
 }
 ?>

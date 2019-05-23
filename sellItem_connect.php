@@ -19,23 +19,6 @@ if(isset($_SESSION["buyerid"])) {
         }
 
         $stmt->close();
-
-        $SELECT2 = "SELECT seller_id FROM eshop.seller WHERE userid = ?";
-        $stmt2 = $conn->prepare($SELECT2);
-        $stmt2->bind_param('i', $userid);
-        $stmt2->execute();
-        $result2 = $stmt2->get_result();
-        if ($result2->num_rows > 0) {
-            while ($row2 = $result2->fetch_assoc()) {
-                $_SESSION["sellerid"] = $row2["seller_id"]; //set session
-            }
-        }else {
-            die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
-        }
-
-        $stmt2->close();
-
-
         $conn->close();        
     }
 } else {

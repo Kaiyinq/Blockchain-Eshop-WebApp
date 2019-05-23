@@ -1,7 +1,7 @@
 <?php 
 
 $prodid = $_POST['prodid'];
-$contractAdd = $_POST['contractAdd'];
+// $contractAdd = $_POST['contractAdd'];
 
 // WRITE TO JSON
 // $str = file_get_contents('sellerItem.json');//get contents of your json file and store it in a string
@@ -25,17 +25,17 @@ $contractAdd = $_POST['contractAdd'];
 
 // UPDATE DB
 require('config.php');
+
 if (mysqli_connect_error()) {
     die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
 } else {
-    $UPDATE = "UPDATE eshop.products SET prod_contractAdd = ? WHERE prod_id = ?";
-    $stmt = $conn->prepare($UPDATE);
-    $stmt->bind_param('si', $contractAdd, $prodid);
+    $DELETE = "DELETE FROM eshop.products WHERE prod_id = ?";
+    $stmt = $conn->prepare($DELETE);
+    $stmt->bind_param('i', $prodid);
     $stmt->execute();
 
     $stmt->close();
     $conn->close();        
 }
-
 ?>
 

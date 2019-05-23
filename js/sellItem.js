@@ -14,7 +14,32 @@ function validateFileType(){
     } 
 }
 
-$(document).ready(function(){ 
+// PROMPT THAT METAMASK/MIST ETC IS RUNNING
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            // web3.eth.sendTransaction({...});
+        } catch (error) {
+            // User denied account access...
+            console.log(error);
+        }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+        window.web3 = new Web3(web3.currentProvider);
+        // Acccounts always exposed
+        // web3.eth.sendTransaction({...});
+    }
+    // Non-dapp browsers...
+    else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+
     $('#submitBtn').click(function(){  
         var item = $('#itemname').val(); 
         var quantity = $('#quantity').val();
@@ -23,9 +48,6 @@ $(document).ready(function(){
         var categoryid = $('#category').val();
         var desc = $('#desc').val();
         var prodid;
-        var contractAdd;
-        var sellerAdd;
-        var oneETHSGD;
         // First of all, we are creating a new date object with "new Date()" containing the current time.
         // After that, we are converting the time with .toISOString() into the format YYYY-MM-DDTHH:mm:ss.sssZ. 
         // And because we only need the first part of this string, we are last using .slice(0,10) to get the first 10 characters of the string.
@@ -58,75 +80,55 @@ $(document).ready(function(){
                 contentType:false,
                 processData:false,
                 cache:false, 
+                dataType: "json",
                 // success message
-                success:function(data){  
-                    prodid = data;
-                    console.log(prodid);
-                    $.ajax({
-                        method: 'GET',
-                        url: 'oneETHSGD.php',
-                        success: function(data) { 
-                            // Get life conversion data (1ETH = ? SGD)
-                            oneETHSGD = data;
-                            console.log(oneETHSGD);
+                success:function(data){ 
+                    prodid = data.prodid;
+                    username = data.username; 
+
+                    // uses web3@0.20.6 and truffle-contract@3.0.6
+                    const Web3 = require('web3');
+                    const web3Provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
+                    $.getJSON('build/contracts/ItemListing.json', function(jsondata) {
+                        (async () => {
+                            const ItemListing = TruffleContract(jsondata);
+                            ItemListing.setProvider(web3Provider);
+                            var account = web3.eth.accounts[0];
+                            instance = await ItemListing.at("0x3338AA63dDdAA61cC98876fD3b94CcFeE6fFD1A5");
                             
-                            // SGD convert to ETH 
-                            var ethprice = (1/(oneETHSGD/price)).toFixed(6);
-                            // ETH convert to WEI
-                            var weiprice = ethprice*1e18;
-                            console.log(weiprice);
-
-                            // uses web3@0.20.6 and truffle-contract@3.0.6
-                            const Web3 = require('web3');
-                            const web3Provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
-                            $.getJSON('build/contracts/ItemListing.json', function(jsondata) {
-                                (async () => {
-                                    const ItemListing = TruffleContract(jsondata);
-                                    ItemListing.setProvider(web3Provider);
-                                    var account = web3.eth.accounts[0];
-                                    const instance = await ItemListing.new({from: account, gas: 3000000});
-                                    itemListContractAdd = instance.address; 
-                                    console.log(itemListContractAdd);
-                                    // contract is passed by WEI
-                                    instance.ItemList(prodid, item, web3.toWei(1, "ether"));
-                                    instance.getSellerAdd.call().then(function(value) {
-                                        sellerAdd = value;
-                                        console.log(value);
-                                        // store details into json format 
-                                        //WriteJSON(prodid, itemListContractAdd, sellerAdd, price, item);
-
-                                        // update DB
-                                        updateDB(prodid, itemListContractAdd);
-
-                                    });
-                                })();
+                            instance.ItemList(prodid, username).then(function(data) {
+                                alert("Product added!");
+                                window.location="accountpage.php";
+                            }).catch(function (e) {
+                                updateDB(prodid);
+                                console.log("Wrong ethereum account.");
+                                alert("Please check that you are using the correct ethereum account.");
+                                location.reload();
                             });
-
-                        }
+                            
+                        })();
                     });
 
-                    
-                },
-                // error message
-                error:function(data){
-                    console.log("Error");
+                }, 
+                error: function(data) {
+                    console.log(data);
                 }
             });  
                        
         }  
         
     });
-});  
+});
 
-function updateDB(prodid, contractAdd) {
+function updateDB(prodid) {
     // store details into json format
     $.ajax({
         method: 'POST',
         url: 'sellItem_connect3.php',
-        data: {prodid: prodid, contractAdd: contractAdd},
+        data: {prodid: prodid},
         success: function(data) { 
-            alert('Item Added!'); 
-            window.location="accountpage.php";
+            // alert('Item Added!'); 
+            // window.location="accountpage.php";
         }
     });
 }

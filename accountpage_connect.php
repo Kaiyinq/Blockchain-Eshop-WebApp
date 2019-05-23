@@ -1,4 +1,6 @@
 <?php
+// GET BUYER ACCOUNT INFORMATION
+
 require('config.php');
 session_start(); //start session
 

@@ -18,6 +18,7 @@ if(isset($_SESSION["buyerid"])) {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {                 
+                $orderId = $row["order_id"]; 
                 $orderStatus = $row["order_status"];   
                 $orderDate = $row["order_date"]; 
                 $orderQuantity = $row["order_quantity"];  
@@ -26,7 +27,9 @@ if(isset($_SESSION["buyerid"])) {
                 $prodPrice = $row["prod_price"]; 
 
                 $totalPrice = $prodPrice * $orderQuantity;
-                if ($orderStatus == "Processing") {
+
+                // <!-- ORDER STATUS - PROCESSING -->
+                if ($orderStatus == "Processing" || $orderStatus == "Cancelling") {
                     echo "<tr>";
                     echo "<td class='thumb'>";
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['prod_pic']).'"/>';
@@ -41,6 +44,8 @@ if(isset($_SESSION["buyerid"])) {
                     echo "<td class='price text-center'><strong>$$prodPrice</strong></td>";
                     echo "<td class='qty text-center'><span>$orderQuantity</span></td>";
                     echo "<td class='total text-center'><strong class='primary-color'>$$totalPrice</strong></td>";
+                    $url = "viewBuyerOrder.php?order=$orderId";
+                    echo "<td class='text-center'><a href=$url>View Order</a></td>";
                     echo "</tr>";
                 }
                
@@ -50,7 +55,5 @@ if(isset($_SESSION["buyerid"])) {
         $stmt->close();
         $conn->close();        
     }
-} else {
-    die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
 }
 ?>

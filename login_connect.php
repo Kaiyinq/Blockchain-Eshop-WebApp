@@ -9,7 +9,11 @@ if(isset($_POST["username"])) {
     if (mysqli_connect_error()) {
         die('Connection Error(' . mysqli_connect_errno() . ')' . mysqli_connect_error());
     } else {
-        $QUERY = "SELECT userid, username, userpass, user_fullname FROM eshop.users WHERE username = ?";
+        $QUERY = "SELECT u.userid, username, userpass, user_fullname, seller_id 
+                    FROM eshop.users u
+                    LEFT JOIN eshop.seller s 
+                    ON u.userid = s.userid
+                    WHERE username = ?";
     
         if ($stmt = $conn->prepare($QUERY)) {
             //prepared statement
@@ -18,10 +22,14 @@ if(isset($_POST["username"])) {
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    //echo "id: " . $row["userid"]. " - Name: " . $row["username"]. " Password:" . $row["userpass"]. "<br>";
-                    //json_encode($row["user_id"]);
                     
+                    $_SESSION["username"] = $row["username"]; //set session
                     $_SESSION["buyerid"] = $row["userid"]; //set session
+
+                    if ($row["seller_id"] != null)
+                        $_SESSION["sellerid"] = $row["seller_id"]; //set session
+
+
                     $fullname = $row["user_fullname"];                    
                     if ($username == $row["username"] && $password == $row["userpass"]) {
                         echo "Welcome " . "$fullname" . "!"; //anything on success

@@ -1108,86 +1108,13 @@ textarea.input {
   background-color: #F8694A;
 }
 
-/*-- Filter list --*/
-
-.filter-list {
-  margin-bottom: 15px;
+/*-- product warning --*/
+#warning {
+  display:none;
 }
 
-.filter-list>li {
-  display: inline-block;
-  margin-right: 2px;
-  margin-bottom: 6px;
-}
-
-.filter-list>li:last-child {
-  margin-right: 0px;
-}
-
-.filter-list li a {
-  position: relative;
-  padding: 0px 5px 0px 20px;
-}
-
-.filter-list li a:before {
-  content: "\f00d";
-  font-family: FontAwesome;
-  position: absolute;
-  left: 4px;
-  top: 5px;
-  line-height: 12px;
-  font-size: 9px;
-  color: #FFF;
-  background: #30323A;
-  width: 12px;
-  text-align: center;
-  border-radius: 50%;
-  height: 12px;
-}
-
-/*-- Price Filter --*/
-
-#price-slider {
-  margin: 60px 0px 50px;
-}
-
-.noUi-target {
-  background-color: #DADADA;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  border-radius: 0px;
-}
-
-.noUi-connect {
-  background-color: #F8694A;
-}
-
-.noUi-horizontal {
-  height: 4px;
-}
-
-.noUi-horizontal .noUi-handle {
-  width: 12px;
-  height: 12px;
-  left: -6px;
-  top: -4px;
-  border: none;
-  background: #30323A;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0px;
-}
-
-.noUi-handle:before, .noUi-handle:after {
-  display: none;
-}
-
-.noUi-tooltip {
-  border: none;
-  color: #FFF;
-  background: #30323A;
-  border-radius: 0px;
+#danger {
+  display:none;
 }
 
 /*----------------------------*\

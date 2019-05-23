@@ -18,6 +18,7 @@ if(isset($_SESSION["buyerid"])) {
         $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {                 
+                $orderId = $row["order_id"]; 
                 $orderStatus = $row["order_status"];   
                 $orderDate = $row["order_date"]; 
                 $orderQuantity = $row["order_quantity"];  
@@ -26,7 +27,9 @@ if(isset($_SESSION["buyerid"])) {
                 $prodPrice = $row["prod_price"]; 
 
                 $totalPrice = $prodPrice * $orderQuantity;
-                if ($orderStatus == "Delivered") {
+
+                // <!-- ORDER STATUS - DELIVERED -->
+                if ($orderStatus == "Delivered" || $orderStatus == "Cancelled" || $orderStatus == "Refunded") {
                     echo "<tr>";
                     echo "<td class='thumb'>";
                     echo '<img src="data:image/jpeg;base64,'.base64_encode($row['prod_pic']).'"/>';
@@ -38,8 +41,8 @@ if(isset($_SESSION["buyerid"])) {
                     echo "<li><span>Order Status: $orderStatus</span></li>";
                     echo "</ul>";
                     echo "</td>";
-                    //if reviewed, then 'review tick' else 'review now' UNDONEEEEE
-                    echo "<a href='#'>Review</a>";
+                    $url = "review.php?order=$orderId";
+                    echo "<td class='text-center'><a href=$url>Review</a></td>";
                     echo "</tr>";
                 }
                
@@ -49,7 +52,5 @@ if(isset($_SESSION["buyerid"])) {
         $stmt->close();
         $conn->close();        
     }
-} else {
-    die(header("HTTP/1.0 404 Not Found")); //Throw an error on failure
-}
+} 
 ?>

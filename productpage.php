@@ -70,6 +70,8 @@
 			<!-- row -->
 			<div class="row">
 				<!--  Product Details -->
+				<div class="alert alert-warning" role="alert" id="warning">
+				</div>
 				<div class="product product-details clearfix">
 					<div class="col-md-6">
 						<div id="product-main-view">
@@ -98,11 +100,11 @@
 							<div class="product-btns">
 								<div class="qty-input">
 									<span class="text-uppercase">QTY: </span>
-									<input class="input" type="number" min="1" value="1">
+									<input class="input" type="number" min="1" value="1" id="quantity">
 								</div>
 								<br><br>
 								<div class="pull-right">
-								<button type="button" class="primary-btn btn-buynow"> Buy Now</button>
+								<button type="button" class="primary-btn btn-buynow">Buy Now</button>
 								</div>
 							</div>
 
@@ -113,12 +115,13 @@
 									<div class="modal-header">
 										<h4 class="modal-title"><?php echo $prodName; ?></h4>
 									</div>
-									<div class="modal-body">
-										<p>To pay, send ETH to the address below</p>
+									<div class="modal-body" style="overflow: hidden;">
+										<p>To pay, click confirm below to send ETH to the address</p>
 										<p class="product-price">Amount</p>
-										<p id="ethamt">(<?php echo $prodPrice ?> SGD)</p>
+										<p id="ethamt"></p>
 										<br>
 										<p class="product-price">Ethereum Address</p>
+										<button type="button" class="primary-btn btn-confirm pull-right">Confirm</button>
 										<p id="contractAddress"></p>
 									</div>
 								</div>
@@ -140,24 +143,7 @@
 										<!-- Display Reviews -->
 										<div class="col-md-12">
 											<div class="product-reviews">
-												<div class="single-review">
-													<div class="review-heading">
-														<div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-														<div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-														<div class="review-rating pull-right">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o empty"></i>
-														</div>
-													</div>
-													<div class="review-body">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-															irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-													</div>
-												</div>
-
+												<div id="reviewinfo"></div>
 												<ul class="reviews-pages pull-right">
 													<li class="active">1</li>
 													<li><a href="#">2</a></li>

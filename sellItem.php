@@ -69,8 +69,8 @@
 					<div class="col-md-3 col-sm-6"></div>
                     <div class="col-md-6">
                         <div class="col-md-12">
-                            <form id="login-form" class="form" action="#" method="post" enctype="multipart/form-data">
-                                <h3 class="text-center">Sell Item</h3>
+                            <form id="sellItem-form" class="form" action="#" method="post" enctype="multipart/form-data">
+                                <h3 class="text-center">Add Item</h3>
                                 <div class="form-group">
                                     <label for="itemname">Item Name:</label><br>
                                     <input type="text" name="itemname" id="itemname" class="input" required>
@@ -119,7 +119,7 @@
 									</div>
 								</div>
                                 <div class="form-group">
-                                    <button class="primary-btn pull-right btn-item" type="button" name="submitBtn" id="submitBtn">Sell Item</button>
+                                    <button class="primary-btn pull-right btn-item" type="button" name="submitBtn" id="submitBtn">Add Item</button>
                                 </div>
                             </form>
                         </div>

@@ -11,7 +11,7 @@ $(document).ready(function(){
     if(username == '' || password == '') {  
       alert("All fields required");
     } else if (!password.match(passwordRegEx)) {
-      alert("Wrong format Password");
+      alert("Wrong password format.");
     } else {  
       $.ajax({  
         url:"login_connect.php",  
@@ -20,11 +20,11 @@ $(document).ready(function(){
         // success message
         success:function(data){  
           alert(data); 
-          window.location="home.php";
+          window.location="accountpage.php";
         },
         // error message
         error:function(data){
-          alert("Wrong username or password!");
+          alert("Your username and password didn't match. Please try again!");
         }
       });  
     }  

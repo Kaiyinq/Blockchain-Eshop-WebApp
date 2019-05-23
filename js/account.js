@@ -34,6 +34,7 @@ function toShipList() {
 }
 
 $(document).ready(function(){  
+    
     $.ajax({  
         url:"accountpage_connect2.php",  
         method:"GET",   
@@ -44,7 +45,26 @@ $(document).ready(function(){
             toReceiveList();
             toReview();
         }
-    }); 
-     
+    });      
+    
+    // function confirmDelivery() {
+    //     alert("haha");
+    // }
+    
 });  
 
+
+
+// for accountpage.js solidity checking -//updateDB(orderId, 2, "Cancelled");
+// function updateDB(orderId, rejectSlip, orderStatus) {
+//     $.ajax({
+//         method: 'POST',
+//         url: 'viewBuyerOrder_connect2.php',
+//         data: {orderId:orderId, rejectSlip:rejectSlip, orderStatus:orderStatus},
+//         success: function(data) { 
+//             //console.log(data);
+//             //alert('Shipping confirmation made!'); 
+//             location.reload();
+//         }
+//     });
+// }
