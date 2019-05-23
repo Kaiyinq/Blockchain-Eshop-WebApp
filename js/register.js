@@ -62,7 +62,6 @@ window.addEventListener('load', async () => {
     var emailAdd = $('#emailAdd').val();
     var birthdate = $('#birthdate').val();
     var gender = $('#gender').val();
-
     if(username == "" || password == "" || fullname == "" || address == "" || emailAdd == "" || birthdate == "" || gender == '') {  
       alert("All fields required!");
     } else if (!username.match(phoneRegEx)) {

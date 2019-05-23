@@ -134,11 +134,8 @@
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-	<!-- Connects to the contract -->
 	<script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/review.js"></script>
-
-</body>
 
 </html>
