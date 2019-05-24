@@ -5,7 +5,7 @@ Required Tools:
 2. xampp 
 3. visual studio code
 4. phpmysql
-5. Twilio (for OTP)
+5. Twilio Account (for OTP) 
 6. Truffle@3.0.7
 7. web3@0.20.6
 8. MetaMask
