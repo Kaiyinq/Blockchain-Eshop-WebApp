@@ -1,4 +1,4 @@
-Done by: Loh Kai Ying (U1622579C)
+Done by: Loh Kai Ying
 
 Required Tools:
 1. ganache
@@ -11,7 +11,7 @@ Required Tools:
 8. MetaMask
 
 Pre-running:
-- Ensure that the project folder is inside xampp
+- Ensure that the project folder is inside xampp; Normally under C:\xampp\htdocs
 - Ensure the phpmysql database is working
 
 Steps to run the project:
