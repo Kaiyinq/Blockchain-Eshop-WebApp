@@ -28,7 +28,7 @@ Steps to run the project:
 - truffle console --network development (use private testnet)
 6. http://127.0.0.1:8887/Blockchain-Eshop-WebApp/login.php
 
-PHPMYSQL Database
+PHPMYSQL Database:
 users table
 - userid (primary key; auto-increment)
 - username (user_phone number)
